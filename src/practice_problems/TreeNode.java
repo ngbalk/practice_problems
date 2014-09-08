@@ -51,11 +51,12 @@ public class TreeNode{
 	}
 	public static void levelOrder(TreeNode root){
 		Queue<TreeNode> q = new LinkedList<TreeNode>();
+		TreeNode breakNode = new TreeNode(100, null, null);
 		q.add(root);
-		q.add(null);
+		q.add(breakNode);
 		while(true){
 			TreeNode cur = q.poll();
-			while(!(cur==null)){
+			while(cur.myVal != 100){
 				System.out.print(cur.myVal + " ");
 				if(cur.myLeft != null){
 					q.add(cur.myLeft);
@@ -69,7 +70,7 @@ public class TreeNode{
 				break;
 			}
 			System.out.println();
-			q.add(null);
+			q.add(breakNode);
 		}
 	}
 
