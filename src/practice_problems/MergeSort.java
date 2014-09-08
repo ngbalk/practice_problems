@@ -9,14 +9,12 @@ public class MergeSort {
 		if(length == 1){
 			return list;
 		}
-		return merge(sort(cut(list, 0, list.size()/2 - 1)), cut(list, list.size() / 2, list.size()));
+		return merge(sort(cut(list, 0, list.size()/2 - 1)), sort(cut(list, list.size() / 2, list.size() - 1)));
 	}
 	public static ArrayList<Integer> cut(ArrayList<Integer> list, Integer begin, Integer end){
 		ArrayList<Integer> ret = new ArrayList<Integer>();
-		for(int i = 0; i<list.size(); i ++){
-			if(i >= begin && i <= end){
+		for(int i = begin; i<=end; i ++){
 				ret.add(list.get(i));
-			}
 		}
 		return ret;
 	}
@@ -27,15 +25,30 @@ public class MergeSort {
 	
 	public static ArrayList<Integer> merge(ArrayList<Integer> a, ArrayList<Integer> b){
 		ArrayList<Integer> ret = new ArrayList<Integer>();
-		if(a.get(0) >= b.get(0)){ 
+		int aInd = 0;
+		int bInd = 0;
+		while(aInd<=a.size() && bInd<=b.size()){
+			if(aInd==a.size()){
+				ret.addAll(bInd, b);
+				break;
+			}
+			else if(bInd==b.size()){
+				ret.addAll(aInd, a);
+				break;
+			}
+			else if(a.get(aInd) <= b.get(bInd)){
+				ret.add(a.get(aInd));
+				aInd ++;
+				continue;
+			}
+			else if(b.get(bInd) <= a.get(aInd)){
+				ret.add(b.get(bInd));
+				bInd ++;
+				continue;
+				
+			}
+		}
 			
-			ret.addAll(b);
-			ret.addAll(a);
-		}
-		else{
-			ret.addAll(a);
-			ret.addAll(b);
-		}
 		return ret;
 		
 	}
