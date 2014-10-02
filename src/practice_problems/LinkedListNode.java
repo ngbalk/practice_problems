@@ -23,6 +23,18 @@ public class LinkedListNode {
 		return cur;
 		
 	}
+	
+	public static LinkedListNode recursiveReverse(LinkedListNode previous, LinkedListNode current){
+		if(current.myNext==null){
+			current.myNext = previous;
+			return current;
+		}
+		LinkedListNode next = current.myNext;
+		current.myNext = previous;
+		previous = current;
+		current = next;
+		return recursiveReverse(previous, current);
+	}
 	public static void printList(LinkedListNode root){
 		LinkedListNode current = root;
 		while(current != null){
@@ -31,6 +43,8 @@ public class LinkedListNode {
 		}
 		
 	}
+	
+	
 	public static void main(String[] args){
 		LinkedListNode last = new LinkedListNode(4, null);
 		LinkedListNode third = new LinkedListNode(3, last);
@@ -40,7 +54,7 @@ public class LinkedListNode {
 		LinkedListNode root = first;
 		printList(root);
 		System.out.println();
-		printList(reverseList(root));
+		printList(recursiveReverse(null, root));
 
 	}
 	
