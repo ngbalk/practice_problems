@@ -43,18 +43,35 @@ public class LinkedListNode {
 		}
 		
 	}
+	public static int findMiddleList(LinkedListNode root){
+		//Excludes circular linked lists
+		LinkedListNode currentNode = root;
+		LinkedListNode aheadNode = root;
+		while(aheadNode!=null){
+			if(aheadNode.myNext==null){
+				break;
+			}
+			currentNode = currentNode.myNext;
+			aheadNode = aheadNode.myNext.myNext;
+		}
+		return currentNode.myVal;
+	}
 	
 	
 	public static void main(String[] args){
-		LinkedListNode last = new LinkedListNode(4, null);
-		LinkedListNode third = new LinkedListNode(3, last);
+		LinkedListNode seventh = new LinkedListNode(7, null);
+		LinkedListNode sixth = new LinkedListNode(6, seventh);
+		LinkedListNode fifth = new LinkedListNode(5, sixth);
+		LinkedListNode fourth = new LinkedListNode(4, fifth);
+		LinkedListNode third = new LinkedListNode(3, fourth);
 		LinkedListNode second = new LinkedListNode(2, third);
 		LinkedListNode first = new LinkedListNode(1, second);
 		
 		LinkedListNode root = first;
 		printList(root);
 		System.out.println();
-		printList(recursiveReverse(null, root));
+		//printList(recursiveReverse(null, root));
+		System.out.println(findMiddleList(root));
 
 	}
 	
